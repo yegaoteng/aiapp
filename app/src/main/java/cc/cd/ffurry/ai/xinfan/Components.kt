@@ -68,7 +68,7 @@ fun AppTextField(
     maxLines: Int = 1,
     minHeight: Dp = 44.dp,
     radius: Dp = 8.dp,
-    background: Color = Color.White,
+    fieldBg: Color = Color.White,
     keyboardType: KeyboardType = KeyboardType.Text,
     password: Boolean = false,
     onSend: (() -> Unit)? = null
@@ -76,7 +76,7 @@ fun AppTextField(
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(radius))
-            .background(background)
+            .background(fieldBg)
             .border(1.dp, Color(0xFFDDDDDD), RoundedCornerShape(radius))
             .heightIn(min = minHeight)
             .padding(horizontal = 12.dp, vertical = 10.dp),

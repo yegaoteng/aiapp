@@ -53,7 +53,7 @@ private sealed class Block {
     data class Image(val alt: String, val url: String) : Block()
 }
 
-private val imageLine = Regex("""^\s*!\[(.*?)\]\((.*?)\)\s*$""")
+private val imageLine = Regex("""^\s*!\[(.*?)\]\((.*?)\)\s*${'$'}""")
 private val inlineRe = Regex("""!?\[([^\]]+)\]\(([^)]+)\)|\*\*(.+?)\*\*|`(.+?)`""")
 
 private fun parseBlocks(src: String): List<Block> {
@@ -94,7 +94,7 @@ private fun parseBlocks(src: String): List<Block> {
             out.add(Block.Image(im.groupValues[1], im.groupValues[2]))
             continue
         }
-        val head = Regex("""^(#{1,6})\s+(.*)$""").find(line)
+        val head = Regex("""^(#{1,6})\s+(.*)${'$'}""").find(line)
         if (head != null) {
             flush()
             out.add(Block.Heading(head.groupValues[2], head.groupValues[1].length))
@@ -105,7 +105,7 @@ private fun parseBlocks(src: String): List<Block> {
             out.add(Block.Quote(line.trimStart().removePrefix("> ")))
             continue
         }
-        val li = Regex("""^\s*(?:[-*]|\d+\.)\s+(.*)$""").find(line)
+        val li = Regex("""^\s*(?:[-*]|\d+\.)\s+(.*)${'$'}""").find(line)
         if (li != null) {
             flush()
             out.add(Block.ListItem(li.groupValues[1]))
